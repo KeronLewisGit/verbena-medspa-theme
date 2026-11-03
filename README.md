@@ -87,7 +87,9 @@ in Site settings. Otherwise it renders the built-in form, which posts to
 server-side validation, old input and per-field errors after the redirect
 (`aria-invalid` + `aria-describedby`), a light per-IP rate limit, storage as a
 private Lead (with admin columns), a `wp_mail()` notification with Reply-To,
-and a success state that fires the same `generate_lead` event once.
+and a success state that fires the same `generate_lead` event once. The
+Book page sends `DONOTCACHEPAGE` and no-cache headers so page caches
+(LiteSpeed Cache included) never serve a stale nonce.
 
 GF loads jQuery. `inc/performance.php` only dequeues jQuery when nothing in
 the queue depends on it, so GF pages keep it.
