@@ -1,0 +1,17 @@
+/*
+Theme Name: Verbena Aesthetics
+Theme URI: https://keronlewis.dev
+Author: Keron Lewis
+Author URI: https://keronlewis.dev
+Description: Custom classic theme for Verbena Aesthetics, a fictional Dallas medspa. Tailwind CSS v4, ACF Pro / Secure Custom Fields field groups, Gravity Forms styling with a native fallback form, built-in technical SEO and schema, GTM/GA4 dataLayer events and a click-to-load booking widget.
+Version: 1.0.0
+Requires at least: 6.5
+Tested up to: 7.1
+Requires PHP: 8.1
+License: GPL-2.0-or-later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: verbena
+Tags: custom-menu, featured-images, accessibility-ready, translation-ready
+*/
+
+/* Front-end styles are compiled by Tailwind into assets/css/app.css. */
