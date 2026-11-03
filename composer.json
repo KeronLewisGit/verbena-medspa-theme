@@ -1,0 +1,22 @@
+{
+	"name": "keronlewis/verbena-theme",
+	"description": "Verbena Aesthetics WordPress theme (dev tooling only).",
+	"type": "wordpress-theme",
+	"license": "GPL-2.0-or-later",
+	"require": {
+		"php": ">=8.1"
+	},
+	"scripts": {
+		"lint": "phpcs",
+		"fix": "phpcbf"
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	},
+	"require-dev": {
+		"wp-coding-standards/wpcs": "^3.4",
+		"dealerdirect/phpcodesniffer-composer-installer": "^1.2"
+	}
+}

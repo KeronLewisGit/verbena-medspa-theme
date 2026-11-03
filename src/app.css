@@ -1,0 +1,290 @@
+/*
+ * Verbena Aesthetics: Tailwind CSS v4 entry point.
+ * Build: npm run build  ->  assets/css/app.css (minified, committed).
+ */
+@import "tailwindcss";
+
+@source "../*.php";
+@source "../inc";
+@source "../templates";
+@source "../template-parts";
+@source "../assets/js";
+@source not "../.local-wp";
+@source not "../node_modules";
+@source not "../vendor";
+
+/* Self-hosted fonts (SIL Open Font License). Paths are relative to assets/css/. */
+@font-face {
+	font-family: "Gloock";
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url("../fonts/gloock-latin.woff2") format("woff2");
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+	font-family: "Albert Sans";
+	font-style: normal;
+	font-weight: 400 700;
+	font-display: swap;
+	src: url("../fonts/albert-sans-latin.woff2") format("woff2");
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+	font-family: "Albert Sans";
+	font-style: italic;
+	font-weight: 400;
+	font-display: swap;
+	src: url("../fonts/albert-sans-italic-latin.woff2") format("woff2");
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/*
+ * Brand tokens. These public custom properties are the source of truth, so a
+ * companion plugin (or a child theme) can restyle everything by overriding
+ * them on :root.
+ */
+:root {
+	--brand-ink: #2b1a2f;
+	--brand-bg: #f7f2ea;
+	--brand-accent: #9e4630;
+	--brand-accent-ink: #fff8f1;
+	--brand-muted: #6e5d66;
+	--brand-surface: #eee6db;
+	--brand-radius: 0.375rem;
+	--brand-font-display: "Gloock", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+	--brand-font-body: "Albert Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+@theme inline {
+	--color-ink: var(--brand-ink);
+	--color-bg: var(--brand-bg);
+	--color-accent: var(--brand-accent);
+	--color-accent-ink: var(--brand-accent-ink);
+	--color-muted: var(--brand-muted);
+	--color-surface: var(--brand-surface);
+	--font-display: var(--brand-font-display);
+	--font-body: var(--brand-font-body);
+	--radius-brand: var(--brand-radius);
+}
+
+@theme {
+	--color-plum: #3f2843;
+	--color-blush: #e7b8a4;
+	--color-mauve: #c9b8c4;
+	--color-line: #dccfc2;
+	--color-paper: #fbf8f3;
+	--text-display: clamp(2.75rem, 1.6rem + 5.2vw, 5.75rem);
+	--text-display--line-height: 1.02;
+	--text-title: clamp(2.25rem, 1.6rem + 2.9vw, 4rem);
+	--text-title--line-height: 1.06;
+	--text-section: clamp(2rem, 1.5rem + 2.2vw, 3.25rem);
+	--text-section--line-height: 1.08;
+	--breakpoint-xs: 26rem;
+}
+
+@layer base {
+	html {
+		-webkit-text-size-adjust: 100%;
+		scroll-behavior: smooth;
+		scroll-padding-top: 6rem;
+	}
+	body {
+		font-size: 1.0625rem;
+		line-height: 1.65;
+	}
+	@media (min-width: 64rem) {
+		body {
+			font-size: 1.125rem;
+		}
+	}
+	h1, h2, h3, h4 {
+		font-family: var(--font-display);
+		font-weight: 400;
+		letter-spacing: -0.01em;
+		text-wrap: balance;
+	}
+	p {
+		text-wrap: pretty;
+	}
+	::selection {
+		background: var(--color-blush);
+		color: var(--color-ink);
+	}
+	:focus-visible {
+		outline: 3px solid var(--color-accent);
+		outline-offset: 3px;
+		border-radius: 2px;
+	}
+	.bg-ink :focus-visible,
+	.bg-plum :focus-visible {
+		outline-color: var(--color-blush);
+	}
+	summary {
+		cursor: pointer;
+		list-style: none;
+	}
+	summary::-webkit-details-marker {
+		display: none;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		html {
+			scroll-behavior: auto;
+		}
+		*,
+		*::before,
+		*::after {
+			animation-duration: 0.01ms !important;
+			animation-iteration-count: 1 !important;
+			transition-duration: 0.01ms !important;
+		}
+	}
+}
+
+@utility wrap {
+	margin-inline: auto;
+	width: 100%;
+	max-width: 82rem;
+	padding-inline: 1.25rem;
+	@media (min-width: 48rem) {
+		padding-inline: 2rem;
+	}
+}
+
+@utility measure {
+	max-width: 65ch;
+}
+
+@layer components {
+	.skip-link {
+		@apply sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-brand focus:bg-ink focus:px-5 focus:py-3 focus:text-bg;
+	}
+
+	.eyebrow {
+		@apply inline-flex items-center gap-3 font-body text-[0.8125rem] font-semibold uppercase tracking-[0.16em] text-accent;
+	}
+	.eyebrow::before {
+		content: "";
+		@apply h-px w-8 bg-current;
+	}
+	.bg-ink .eyebrow,
+	.bg-plum .eyebrow {
+		@apply text-blush;
+	}
+
+	.btn {
+		@apply inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full px-6 py-3 font-body text-base font-semibold leading-tight transition-colors duration-200;
+	}
+	.btn svg {
+		@apply transition-transform duration-200;
+	}
+	.btn:hover svg {
+		@apply translate-x-0.5;
+	}
+	.btn-primary {
+		@apply bg-accent text-accent-ink hover:bg-ink;
+	}
+	.btn-ghost {
+		@apply border border-ink/30 text-ink hover:border-ink hover:bg-ink hover:text-bg;
+	}
+	.btn-light {
+		@apply bg-bg text-ink hover:bg-blush;
+	}
+	.btn-outline-light {
+		@apply border border-bg/40 text-bg hover:border-bg hover:bg-bg hover:text-ink;
+	}
+
+	.nav-link {
+		@apply relative inline-flex min-h-11 items-center px-1 text-[0.98rem] font-medium text-ink/85 transition-colors hover:text-ink;
+	}
+	.nav-link::after {
+		content: "";
+		@apply absolute inset-x-1 bottom-2 h-px origin-left scale-x-0 bg-accent transition-transform duration-200;
+	}
+	.nav-link:hover::after,
+	.nav-link[aria-current="page"]::after {
+		@apply scale-x-100;
+	}
+	.nav-link[aria-current="page"] {
+		@apply text-ink;
+	}
+
+	.filter-chip {
+		@apply inline-flex min-h-11 items-center gap-1.5 rounded-full border border-ink/25 bg-bg px-5 text-[0.98rem] font-medium text-ink transition-colors hover:border-ink;
+	}
+	.filter-chip[aria-pressed="true"] {
+		@apply border-ink bg-ink text-bg;
+	}
+
+	.card-link::after {
+		content: "";
+		@apply absolute inset-0 z-10;
+	}
+
+	.prose-verbena {
+		@apply measure text-ink/90;
+	}
+	.prose-verbena > * + * {
+		@apply mt-5;
+	}
+	.prose-verbena :where(h2):not(:where(.not-prose *)) {
+		@apply mt-12 text-[2rem] leading-tight text-ink first:mt-0;
+	}
+	.prose-verbena :where(h3):not(:where(.not-prose *)) {
+		@apply mt-9 text-2xl leading-snug text-ink;
+	}
+	.prose-verbena :where(a):not(:where(.not-prose *, .btn)) {
+		@apply font-medium text-accent underline decoration-1 underline-offset-4 hover:text-ink;
+	}
+	.prose-verbena :where(ul):not(:where(.not-prose *)) {
+		@apply list-none space-y-3 pl-0;
+	}
+	.prose-verbena :where(ul > li):not(:where(.not-prose *)) {
+		@apply relative pl-7;
+	}
+	.prose-verbena :where(ul > li):not(:where(.not-prose *))::before {
+		content: "";
+		@apply absolute left-0 top-[0.7em] h-px w-4 bg-accent;
+	}
+	.prose-verbena :where(strong):not(:where(.not-prose *)) {
+		@apply font-semibold text-ink;
+	}
+
+	.form-label {
+		@apply block text-[0.95rem] font-semibold text-ink;
+	}
+	.form-input {
+		@apply block min-h-12 w-full rounded-brand border border-ink/25 bg-paper px-4 py-3 text-base text-ink placeholder:text-muted/80 transition-colors focus:border-ink focus:outline-none focus:ring-2 focus:ring-accent/40;
+	}
+	.form-input[aria-invalid="true"] {
+		@apply border-accent bg-[#fbefe9];
+	}
+	.form-error {
+		@apply text-sm font-medium text-accent;
+	}
+	.form-alert {
+		@apply rounded-brand border px-5 py-4 text-base;
+	}
+	.form-alert-error {
+		@apply border-accent/40 bg-[#fbefe9] text-ink;
+	}
+	.form-alert-success {
+		@apply border-ink/15 bg-surface text-ink;
+	}
+
+	/* Gravity Forms markup when GF is active (inc/gravity-forms.php). */
+	.verbena-gf .gform_fields {
+		@apply grid gap-x-5 sm:grid-cols-2;
+	}
+	.verbena-gf .gfield--width-full,
+	.verbena-gf .gfield--type-textarea,
+	.verbena-gf .gfield--type-consent {
+		@apply sm:col-span-2;
+	}
+	.verbena-gf .gfield_required {
+		@apply ml-1 text-accent;
+	}
+	.verbena-gf .gform_validation_container {
+		@apply hidden;
+	}
+}

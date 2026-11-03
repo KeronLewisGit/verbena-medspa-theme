@@ -1,0 +1,8 @@
+node_modules/
+vendor/
+.local-wp/
+.screens/
+dist/
+.DS_Store
+*.log
+.phpcs-cache

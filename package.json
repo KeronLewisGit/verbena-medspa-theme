@@ -1,0 +1,16 @@
+{
+  "name": "verbena-theme",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Build tooling for the Verbena Aesthetics WordPress theme.",
+  "license": "GPL-2.0-or-later",
+  "scripts": {
+    "build": "tailwindcss -i ./src/app.css -o ./assets/css/app.css --minify",
+    "dev": "tailwindcss -i ./src/app.css -o ./assets/css/app.css --watch",
+    "package": "bash scripts/package.sh"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.0",
+    "tailwindcss": "^4.1.0"
+  }
+}
