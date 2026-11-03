@@ -247,3 +247,22 @@ function verbena_handle_consult() {
 }
 add_action( 'admin_post_nopriv_verbena_consult', 'verbena_handle_consult' );
 add_action( 'admin_post_verbena_consult', 'verbena_handle_consult' );
+
+/**
+ * Keep pages with the consultation form out of full-page caches. The form
+ * carries a nonce, and a cached copy would go stale after a day.
+ * DONOTCACHEPAGE is honoured by LiteSpeed Cache, WP Super Cache, W3TC and others.
+ *
+ * @return void
+ */
+function verbena_consult_page_no_cache() {
+	if ( ! is_page_template( 'templates/template-contact.php' ) ) {
+		return;
+	}
+	if ( ! defined( 'DONOTCACHEPAGE' ) ) {
+		define( 'DONOTCACHEPAGE', true ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound -- shared cache-plugin convention.
+	}
+	header( 'X-LiteSpeed-Cache-Control: no-cache' );
+	nocache_headers();
+}
+add_action( 'template_redirect', 'verbena_consult_page_no_cache' );
